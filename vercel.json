@@ -1,0 +1,26 @@
+{
+  "installCommand": "echo Skipping dependency install for static build",
+  "buildCommand": "node scripts/validate-clean.mjs && node --check public/original/studentsguide-clean.js && node scripts/build-static.mjs",
+  "outputDirectory": "dist",
+  "routes": [
+    {
+      "src": "/materials/([^/]+)",
+      "dest": "/api/social-preview?type=material&id=$1&path=/materials/$1"
+    },
+    {
+      "src": "/past-questions/([^/]+)",
+      "dest": "/api/social-preview?type=past&id=$1&path=/past-questions/$1"
+    },
+    {
+      "src": "/updates/([^/]+)",
+      "dest": "/api/social-preview?type=update&id=$1&path=/updates/$1"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/.*",
+      "dest": "/index.html"
+    }
+  ]
+}
